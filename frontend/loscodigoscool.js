@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+import {funcionFetch} from "./create";
+
+console.log(funcionFetch())
+
   const mostrar = () => {
     const list = document.getElementById('ulu')
     list.style.display = 'flex'
@@ -61,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
           .then((response) => response.json())
           .then((json) => console.log(json));
-      //generarTabla()
-      form.reset()
+          form.reset()
       }  else {
         alert("Debe llenar todos los datos")
     }

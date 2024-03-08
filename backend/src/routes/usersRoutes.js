@@ -1,33 +1,29 @@
 const express = require('express')
 const router = express.Router()
-// const authMiddlewares = require('../middlewares/auth')
+//const authMiddlewares = require('../middlewares/auth')
 const User = require('../models/usersModel')
 
-router.post('/login', async (req, res)=>{
-    try{
-        const {email, password} = req.body
-        const user = await User.findOne({email: email})
-        const validacion = await User.isvalidPassword(password, user.password)
-        console.log(user)
-        if(!user || !validacion) {
-            console.log("entro mal")
-            res.status(401).send({message:'Email or password invalid'})
+router.post('/login', async(req, res) => {
+    try {
+        const user = {email, password} = req.body
+        // db : body
+        const users = await User.findOne({email: email});
+        // recibe = password en texto plano, y, hash.
+        if (!user || !(await User.isValidPassword(password, users.password))) {
+            res.status(401).send({message: "Invalid email or password"});
         } else {
-            console.log("entro bien")
-            const token = await User.createToken({_id:user._id, first_name:user.first_name})
-            res.status(200).send({message:'Login success', data:token})
+            const token = await User.createToken({_id: user._id, first_name: user.first_name})
+            res.status(201).send({message: "Login Success", data: token })
         }
-    }
-    catch (error){
-       res.status(400).send({message:error})
+    } catch (error) {
+        res.status(400).send({message: error});
     }
 })
-
 
 router.post('/create', async (req, res)=>{
     try{
         let user = req.body
-        //user.password = await User.encryptPassword(user.password)
+        user.password = await User.encryptPassword(user.password)
         const newUser = await User.create(user)
         newUser.save()  
         res.status(201).send({message:`User created ${newUser}`})
@@ -37,7 +33,7 @@ router.post('/create', async (req, res)=>{
     }
 })
 
-router.get('/', async (req, res)=>{
+router.get('/key', async (req, res)=>{
     try{
         const users = await User.find()
         res.send({message: 'All users', data:users})

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+//const authMiddlewares = require('../middlewares/auth')
 const Posts = require('../models/postsModel');
 
 // Get - Todas las publicaciones
@@ -14,8 +15,8 @@ router.get('/', async (req, res)=>{
 })
 
 // Post - Publicación nueva
-router.post('/', async(req, res) => {
-    try {    
+/*router.post('/', async(req, res) => {
+    try {
         let post = req.body;
         const newPost = await Posts.create(post);
         await newPost.save();
@@ -24,6 +25,10 @@ router.post('/', async(req, res) => {
         res.status(400).send({message: error});
     }
 })
+*/
+
+
+
 
 // Put - actualiza publicaciones
 router.put('/:id', async (req,res)=>{

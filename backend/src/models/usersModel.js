@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String, 
         required: true,
+    },
+    role:{
+        type: String,
+        required: true
     }
 },
 {
@@ -32,7 +36,7 @@ const userSchema = new mongoose.Schema({
             const salt = await bcrypt.genSalt(15) // determina cuántas veces se va a reencriptar la contraseña
             return await bcrypt.hash(password, salt)
         },
-        isvalidPassword: async (password, hash) =>{
+        isValidPassword: async (password, hash) =>{
             return await bcrypt.compare(password, hash)
         },
         createToken: async (payload) =>{
