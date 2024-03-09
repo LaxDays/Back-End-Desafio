@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/', postsRoutes);
-app.use('/users', usersRoutes);
+app.use('/', usersRoutes);
 
 mongoDB.connect.then((message)=>{
     console.log(message);

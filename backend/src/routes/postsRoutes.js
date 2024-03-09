@@ -15,7 +15,7 @@ router.get('/', async (req, res)=>{
 })
 
 // Post - Publicación nueva
-/*router.post('/', async(req, res) => {
+router.post('/', async(req, res) => {
     try {
         let post = req.body;
         const newPost = await Posts.create(post);
@@ -25,7 +25,7 @@ router.get('/', async (req, res)=>{
         res.status(400).send({message: error});
     }
 })
-*/
+
 
 
 

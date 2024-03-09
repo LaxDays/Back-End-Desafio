@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let dataFilter = {first_name:first_nameJS, email:usernameJS, password:passwordJS, role:role};
         
         if(usernameJS && passwordJS && first_nameJS) {
-            fetch("http://localhost:3000/users/create", {
+            fetch("http://localhost:3000/create", {
                 method: "Post",
                 body: JSON.stringify(dataFilter),
                 headers: {
@@ -25,24 +25,5 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert("Debe llenar todos los datos")
         }
-    
-    
     })
 })
-
-
-export const funcionFetch = async() => {
-    fetch("http://localhost:3000/users/key", {
-        method: "Get"
-    })
-    .then(response => response.json())
-    .then(json => json.data)
-    .then(data=>{console.log(data)})
-}
-
-
-
-
-
-
-

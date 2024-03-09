@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-import {funcionFetch} from "./create";
-
-console.log(funcionFetch())
-
   const mostrar = () => {
     const list = document.getElementById('ulu')
     list.style.display = 'flex'
@@ -26,12 +22,10 @@ console.log(funcionFetch())
   document.getElementById('btnM').addEventListener('click', mostrar)
 
   // la magia de los post
-  const form = document.querySelector('form')
-  const tituloImput = document.getElementById('titulo')
-  const articuloImput = document.getElementById('articulo')
-  const bodyTabla = document.getElementById('bodyTabla')
-
-  //N-let data = JSON.parse(localStorage.getItem('formData')) || []
+    const form = document.querySelector('form')
+    const tituloImput = document.getElementById('titulo')
+    const articuloImput = document.getElementById('articulo')
+    const bodyTabla = document.getElementById('bodyTabla')
 
   form.addEventListener('submit', function (e) {
     e.preventDefault()
@@ -65,28 +59,14 @@ console.log(funcionFetch())
       })
           .then((response) => response.json())
           .then((json) => console.log(json));
+          generarTabla()
           form.reset()
       }  else {
         alert("Debe llenar todos los datos")
     }
 })
-/* N
-    if (titulo && articulo) {
-      const newPost = {titulo, articulo, tiempo, fecha, numAleatorio, nombreAleatorio, diaAleatorio, fechaAleatoria}
-      data.push(newPost)
-      saveDataLocalStorage()
-      generarTabla()
-      form.reset()
-    }
 
-  })
-
-  function saveDataLocalStorage() {
-    localStorage.setItem('formData', JSON.stringify(data))
-  }
-  */
-
-  generarTabla = () => {
+  const generarTabla = () => {
     bodyTabla.innerHTML = ''
 
     fetch('http://localhost:3000/', {
@@ -259,9 +239,8 @@ console.log(funcionFetch())
     generarTabla()
   }
 
-  // este es el buscador 
   const d = document
-  searchFilters = (input, selector) => {
+  const searchFilters = (input, selector) => {
     d.addEventListener('keyup', (e) => {
       if (e.target.matches(input)) {
         d.querySelectorAll(selector).forEach((el) => {
