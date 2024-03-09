@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-//const authMiddlewares = require('../middlewares/auth')
+//const validUserId = require('../middlewares/auth')
 const Posts = require('../models/postsModel');
 
 // Get - Todas las publicaciones
@@ -14,6 +14,7 @@ router.get('/', async (req, res)=>{
     }
 })
 
+
 // Post - Publicación nueva
 router.post('/', async(req, res) => {
     try {
@@ -26,7 +27,23 @@ router.post('/', async(req, res) => {
     }
 })
 
-
+/*
+router.post('/', async(req, res) => {
+    try {
+        let post = req.body;
+        let token = req.body.token;
+        if(!token) {
+            res.status(400).send({message: "Necesitas hacer login primero"});
+        } else{
+            const newPost = await Posts.create(post);
+            await newPost.save();
+            res.status(201).send({message: "Post created", data: newPost});
+        }
+    } catch (error) {
+        res.status(400).send({message: error});
+    }
+})
+*/
 
 
 

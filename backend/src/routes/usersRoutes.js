@@ -43,5 +43,12 @@ router.get('/key', async (req, res)=>{
     }
 })
 
+async function isUser (res,req,next){
+    if (req.user.role == "user") {
+        next() 
+    } else {
+        res.status(401).send({message: "user not admin"})
+    }
+}
 
 module.exports = router
